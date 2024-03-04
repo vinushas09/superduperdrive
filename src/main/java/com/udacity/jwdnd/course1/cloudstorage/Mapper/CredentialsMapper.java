@@ -1,8 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.Mapper;
 
-import com.udacity.jwdnd.course1.cloudstorage.Model.Credentials;
-import com.udacity.jwdnd.course1.cloudstorage.Model.Notes;
-import com.udacity.jwdnd.course1.cloudstorage.Model.Users;
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Credentials;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
@@ -15,8 +13,11 @@ public interface CredentialsMapper {
     @Select("SELECT * FROM CREDENTIALS WHERE credentialid = #{credentialid}")
     Credentials getCredentials(int credentialid);
 
+    @Select("SELECT key FROM CREDENTIALS WHERE credentialid = #{credentialid}")
+    String getKey(int credentialid);
+
     @Update("UPDATE CREDENTIALS SET url = #{url}, username = #{username}, password = #{password} WHERE credentialid = #{credentialid}")
-    void updateCredentials(int credentialid);
+    void updateCredentials(Credentials credentialid);
 
     @Delete("DELETE FROM CREDENTIALS WHERE username = #{username}")
     void deleteCredentials(String username);

@@ -1,7 +1,9 @@
 package com.udacity.jwdnd.course1.cloudstorage.Controller;
 
-import com.udacity.jwdnd.course1.cloudstorage.Model.Credentials;
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
+import com.udacity.jwdnd.course1.cloudstorage.services.EncryptionService;
+import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class CredentialsController {
 
     private CredentialsService credentialsService;
+    private EncryptionService encryptionService;
+    private UserService userService;
 
-    public CredentialsController(CredentialsService credentialsService){
+    public CredentialsController(CredentialsService credentialsService, EncryptionService encryptionService,UserService userService){
         this.credentialsService = credentialsService;
+        this.encryptionService = encryptionService;
     }
 
     @GetMapping
@@ -21,23 +26,21 @@ public class CredentialsController {
         return "home";
     }
 
-    @PostMapping("/storeCredentails")
-    public String storeCredentails(@RequestParam Credentials credentials, Model model){
-        int credentialsAdded = credentialsService.createCredentials(credentials);
+    @PostMapping("/addCredentails")
+    public String addCredentails(Credentials credentials, Model model){
+        if(credentials.getCredentialid() == null){
+            credentialsService.createCredentials(credentials);
+        } else {
+            credentialsService.editCredentials(credentials);
+        }
         model.addAttribute("credentials", "added successfully");
         return "home";
     }
 
     @GetMapping("/viewCredentials/{id}")
     public String viewCredentials(@PathVariable int credentialid, Model model){
-        model.addAttribute("credentials",credentialsService.viewCredentials(credentialid));
-        return "home";
-    }
-
-    @PutMapping("/editCredentials/{id}")
-    public String updateCredentials(@PathVariable int credentialid, Model model){
-        credentialsService.editCredentials(credentialid);
-        model.addAttribute("credentials","updated");
+        credentialsService.viewCredentials(credentialid);
+        model.addAttribute("credentials","successfully updated");
         return "home";
     }
 
@@ -45,7 +48,6 @@ public class CredentialsController {
     public String deleteCredentials(@PathVariable String name, Model model){
         credentialsService.deleteNotes(name);
         model.addAttribute("deleteCredential", "successfully deleted");
-
         return "home";
     }
 }

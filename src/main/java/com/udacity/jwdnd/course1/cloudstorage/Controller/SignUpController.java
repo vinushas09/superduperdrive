@@ -1,6 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.Controller;
 
-import com.udacity.jwdnd.course1.cloudstorage.Model.Users;
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Users;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,12 @@
 package com.udacity.jwdnd.course1.cloudstorage.Controller;
 
-import com.udacity.jwdnd.course1.cloudstorage.Model.Users;
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Files;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,10 +44,13 @@ public class FileController {
         return "home";
     }
 
-    @GetMapping("/dowmloadFiles/{name}")
-    public String downloadFiles(@PathVariable String filename, Model model){
-        model.addAttribute("filedata", fileService.downloadFiles(filename));
-        return "home";
+    @GetMapping("/downloadFile/{fileid}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable int fileid, Model model){
+        Files file = fileService.getFile(fileid);
+        return  ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(file.getContenttype()))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=\""+file.getFilename()+"\"")
+                .body(new ByteArrayResource(file.getFiledata()));
     }
 
     @GetMapping("/viewFiles/{userid}")

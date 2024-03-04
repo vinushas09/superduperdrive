@@ -1,21 +1,25 @@
 package com.udacity.jwdnd.course1.cloudstorage.services;
 
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Notes;
 import com.udacity.jwdnd.course1.cloudstorage.Mapper.NotesMapper;
-import com.udacity.jwdnd.course1.cloudstorage.Model.Notes;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NotesService {
 
     private NotesMapper notesMapper;
+    private UserService userService;
+    public NotesService(NotesMapper notesMapper,UserService userService){
 
-    public NotesService(NotesMapper notesMapper){
         this.notesMapper = notesMapper;
+        this.userService = userService;
     }
 
     // create new notes
     public int createNotes(Notes note){
-        return notesMapper.insertNotes(note);
+        int userid = userService.getCurrentUser();
+        Notes newNote = new Notes(null,note.getNotetitle(),note.getNotedescription(),userid);
+        return notesMapper.insertNotes(newNote);
     }
 
     // view notes
@@ -24,8 +28,13 @@ public class NotesService {
     }
 
     //edit notes
-    public void editNotes(String noteTitle){
-         notesMapper.updateNotes(noteTitle);
+    public void editNotes(Notes notes){
+        int userid = userService.getCurrentUser();
+        Notes updatedNotes = notes;
+        updatedNotes.setNotetitle(notes.getNotetitle());
+        updatedNotes.setNotedescription(notes.getNotedescription());
+        updatedNotes.setUserid(userid);
+        notesMapper.updateNotes(updatedNotes);
     }
 
     //delete notes

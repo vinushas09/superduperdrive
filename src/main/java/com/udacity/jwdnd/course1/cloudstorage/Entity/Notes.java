@@ -1,20 +1,23 @@
-package com.udacity.jwdnd.course1.cloudstorage.Model;
+package com.udacity.jwdnd.course1.cloudstorage.Entity;
 
 public class Notes {
 
-    private int noteid; //PK
+    private Integer noteid; //PK
     private String notetitle;
     private String notedescription;
-    private int userid; //FK
+    private Integer userid; //FK
 
-    public Notes(Integer noteid, String notetitle, String notedescription, int userid) {
+    public Notes(){
+
+    }
+    public Notes(Integer noteid, String notetitle, String notedescription, Integer userid) {
         this.noteid = noteid;
         this.notetitle = notetitle;
         this.notedescription = notedescription;
         this.userid = userid;
     }
 
-    public int getNoteid() {
+    public Integer getNoteid() {
         return noteid;
     }
 
@@ -38,7 +41,7 @@ public class Notes {
         this.notedescription = notedescription;
     }
 
-    public int getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 

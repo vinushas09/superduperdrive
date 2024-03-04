@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/loginUser")
 public class LoginController {
 
     @GetMapping
@@ -14,10 +14,4 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping
-    public String validateUserCredentials(@RequestParam String username, @RequestParam String password){
-        // TO-DO authenticate the username and password
-
-        return "home";
-    }
 }

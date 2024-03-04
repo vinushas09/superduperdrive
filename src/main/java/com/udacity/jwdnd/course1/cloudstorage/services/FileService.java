@@ -1,31 +1,28 @@
 package com.udacity.jwdnd.course1.cloudstorage.services;
 
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Files;
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Users;
 import com.udacity.jwdnd.course1.cloudstorage.Mapper.FilesMapper;
-import com.udacity.jwdnd.course1.cloudstorage.Model.Files;
-import com.udacity.jwdnd.course1.cloudstorage.Model.Users;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class FileService {
 
     private FilesMapper filesMapper;
-    private Users users;
-
-    public FileService(FilesMapper filesMapper, Users users){
-
+    private UserService userService;
+    public FileService(FilesMapper filesMapper,UserService userService){
         this.filesMapper = filesMapper;
-        this.users = users;
+        this.userService = userService;
     }
 
     // upload file
     public int uploadFiles(MultipartFile file) throws IOException {
-        Files newFile = new Files(null, file.getOriginalFilename(), file.getContentType(), file.getSize(),users.getUserid(), file.getBytes());
+        Integer userid = userService.getCurrentUser();
+        Files newFile = new Files(null, file.getOriginalFilename(), file.getContentType(), file.getSize(),userid, file.getBytes());
         return filesMapper.insertFiles(newFile);
     }
 
@@ -34,8 +31,8 @@ public class FileService {
         return filesMapper.getUserFiles(userid);
     }
 
-    public Files downloadFiles(String filename){
-        return filesMapper.getFiles(filename);
+    public Files getFile(int fileid){
+        return filesMapper.getFile(fileid);
     }
 
     //delete file

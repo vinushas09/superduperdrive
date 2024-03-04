@@ -1,8 +1,9 @@
 package com.udacity.jwdnd.course1.cloudstorage.services;
 
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Users;
 import com.udacity.jwdnd.course1.cloudstorage.Mapper.UserMapper;
-import com.udacity.jwdnd.course1.cloudstorage.Model.Users;
-import org.apache.catalina.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -36,11 +37,11 @@ public class UserService {
         return true;
     }
 
-    //login, verify credentials can be done in spring security class
-//    public boolean verifyLoginCredentials(String username, String password){
-//        if(userMapper.getUser(username).equals(username) && userMapper.getUser(password).equals(password)){
-//            return true;
-//        }
-//        return false;
-//    }
+    //get the userid
+    public int getCurrentUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        return userMapper.getUserId(username);
+    }
+
 }

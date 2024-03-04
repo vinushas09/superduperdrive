@@ -1,8 +1,11 @@
 package com.udacity.jwdnd.course1.cloudstorage.Controller;
 
-import com.udacity.jwdnd.course1.cloudstorage.Model.Notes;
-import com.udacity.jwdnd.course1.cloudstorage.Model.Users;
+
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Notes;
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Users;
 import com.udacity.jwdnd.course1.cloudstorage.services.NotesService;
+import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class NotesController {
 
     private NotesService notesService;
-    private Users users;
 
-    public NotesController(NotesService notesService, Users users){
+    public NotesController(NotesService notesService,UserService userService){
         this.notesService = notesService;
-        this.users = users;
     }
 
     @GetMapping
@@ -24,24 +25,18 @@ public class NotesController {
         return "home";
     }
 
-//    @PostMapping("/createNotes")
-//    public String createNotes(@RequestParam("notetitle") String notetitle,@RequestParam("notedescription") String noteDescription ,Model model){
-//        Notes newNote = new Notes(null,notetitle,noteDescription, users.getUserid());
-//        notesService.createNotes(newNote);
-//        model.addAttribute("notes", true);
-//        return "home";
-//    }
-
     @PostMapping("/createNotes")
-    public String createNotes(@RequestParam("notes") Notes notes , Model model){
-        notesService.createNotes(notes);
-        model.addAttribute("notes", true);
+    public String createNotes(Notes notes , Model model){
+        if(notes.getNoteid() == null){
+           notesService.createNotes(notes);
+        }
+        model.addAttribute("newnotes", true);
         return "home";
     }
 
     @PutMapping("/editNotes")
-    public String editNotes(@RequestParam("notestitle") String notesTitle, Model model){
-        notesService.editNotes(notesTitle);
+    public String editNotes(Notes note,Model model){
+        notesService.editNotes(note);
         model.addAttribute("notestitle", "notes updated successfully ");
         return "home";
     }

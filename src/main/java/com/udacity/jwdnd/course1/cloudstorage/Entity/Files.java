@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.course1.cloudstorage.Model;
+package com.udacity.jwdnd.course1.cloudstorage.Entity;
 
 import java.sql.Blob;
 

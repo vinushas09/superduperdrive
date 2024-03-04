@@ -1,6 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.Mapper;
 
-import com.udacity.jwdnd.course1.cloudstorage.Model.Files;
+import com.udacity.jwdnd.course1.cloudstorage.Entity.Files;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,13 +15,16 @@ public interface FilesMapper {
     @Select("SELECT * FROM Files WHERE filename = #{filename}")
     Files getFiles(String filename);
 
+    @Select("SELECT * FROM Files WHERE fileid = #{fileid}")
+    Files getFile(int fileid);
+
     @Select("SELECT * FROM Files WHERE userid = #{userid}")
     List<Files> getUserFiles(int userid);
 
-    @Update("UPDATE FILES SET filename = #{filename} WHERE filename = #{filename}")
-    void updateFiles(Files files);
+//    @Update("UPDATE FILES SET filename = #{filename} WHERE filename = #{filename}")
+//    void updateFiles(Files files);
 
-    @Delete("DELETE FROM FILES WHERE filename = #{filename}")
+    @Delete("DELETE FROM FILES WHERE fileid = #{fileid}")
     void deleteFile(String fileName);
 
 }
