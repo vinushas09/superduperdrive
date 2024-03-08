@@ -1,11 +1,12 @@
 package com.udacity.jwdnd.course1.cloudstorage.Controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.Entity.Users;
+import com.udacity.jwdnd.course1.cloudstorage.Mapper.UserMapper;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SignupController {
 
     private UserService userService;
-
-    public SignupController(UserService userService){
+    private UserMapper userMapper;
+    public SignupController(UserService userService, UserMapper userMapper){
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @GetMapping
@@ -25,7 +27,7 @@ public class SignupController {
     }
 
     @PostMapping
-    public String signupUser(Users users, Model model) {
+    public String signupUser(Users users, Model model, Authentication authentication) {
         String signupError = null;
 
         if (!userService.checkUserAlreadyExists(users.getUsername())) {
@@ -42,7 +44,9 @@ public class SignupController {
         } else {
             model.addAttribute("signupError", signupError);
         }
-        
+        String userName = authentication.getName();
+        System.out.println("user id is " + userMapper.getUserId(users.getUsername()));
+        System.out.println("Authenticated user id is " + userName);
         return "signup";
     }
 }

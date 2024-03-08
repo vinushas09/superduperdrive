@@ -21,7 +21,7 @@ public class CredentialsService {
 
     // create credentials
     public int createCredentials(Credentials credentials){
-        int userid = userService.getCurrentUser();
+        Integer userid = userService.getCurrentUser();
         String key = encryptionService.getKey();
         credentials.setUrl(credentials.getUrl());
         credentials.setUsername(credentials.getUsername());

@@ -19,7 +19,7 @@ public class NotesService {
 
     // create new notes
     public int createNotes(Notes note){
-        int userid = userService.getCurrentUser();
+        Integer userid = userService.getCurrentUser();
         Notes newNote = new Notes(null,note.getNotetitle(),note.getNotedescription(),userid);
         return notesMapper.insertNotes(newNote);
     }
@@ -31,7 +31,7 @@ public class NotesService {
 
     //edit notes
     public void editNotes(Notes notes){
-        int userid = userService.getCurrentUser();
+        Integer userid = userService.getCurrentUser();
         Notes updatedNotes = notes;
         updatedNotes.setNotetitle(notes.getNotetitle());
         updatedNotes.setNotedescription(notes.getNotedescription());

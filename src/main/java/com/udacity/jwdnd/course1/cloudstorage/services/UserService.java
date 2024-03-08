@@ -35,7 +35,7 @@ public class UserService {
     }
 
     //get the userid
-    public int getCurrentUser(){
+    public Integer getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         return userMapper.getUserId(username);
