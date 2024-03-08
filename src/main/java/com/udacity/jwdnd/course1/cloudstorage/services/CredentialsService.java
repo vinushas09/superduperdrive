@@ -4,6 +4,8 @@ import com.udacity.jwdnd.course1.cloudstorage.Entity.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.Mapper.CredentialsMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CredentialsService {
 
@@ -30,9 +32,14 @@ public class CredentialsService {
     }
 
     // view credentials
-    public Credentials viewCredentials(int credentialid){
+    public Credentials getCredentials(int credentialid){
         return credentialsMapper.getCredentials(credentialid);
     }
+
+    public List<Credentials> getCredentialsOfUser(Integer userid){
+        return credentialsMapper.getCredentialsOfUser(userid);
+    }
+
 
     //get key
     public String getCredentialKey(int credentialid){
@@ -50,7 +57,7 @@ public class CredentialsService {
     }
 
     //delete credentials
-    public void deleteNotes(String userName){
-        credentialsMapper.deleteCredentials(userName);
+    public void deleteNotes(Integer credentialid){
+        credentialsMapper.deleteCredentials(credentialid);
     }
 }

@@ -31,10 +31,7 @@ public class UserService {
     }
 
     public boolean checkUserAlreadyExists(String username){
-        if(userMapper.getUser(username).equals(username)){
-            return false;
-        }
-        return true;
+        return userMapper.getUser(username) == null;
     }
 
     //get the userid

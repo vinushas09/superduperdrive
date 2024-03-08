@@ -4,6 +4,8 @@ import com.udacity.jwdnd.course1.cloudstorage.Entity.Notes;
 import com.udacity.jwdnd.course1.cloudstorage.Mapper.NotesMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NotesService {
 
@@ -23,7 +25,7 @@ public class NotesService {
     }
 
     // view notes
-    public Notes viewNotes(int userid){
+    public List<Notes> viewNotes(int userid){
         return notesMapper.getNotes(userid);
     }
 

@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("notes")
+@RequestMapping("/notes")
 public class NotesController {
 
     private NotesService notesService;
@@ -25,23 +25,23 @@ public class NotesController {
         return "home";
     }
 
-    @PostMapping("/createNotes")
-    public String createNotes(Notes notes , Model model){
+    @PostMapping("/createNote")
+    public String createNotes(@ModelAttribute("notes") Notes notes , Model model){
         if(notes.getNoteid() == null){
            notesService.createNotes(notes);
         }
-        model.addAttribute("newnotes", true);
+        model.addAttribute("newnotes", "created successfully");
         return "home";
     }
 
-    @PutMapping("/editNotes")
-    public String editNotes(Notes note,Model model){
+    @PutMapping("/editNote")
+    public String editNotes(@ModelAttribute Notes note,Model model){
         notesService.editNotes(note);
         model.addAttribute("notestitle", "notes updated successfully ");
         return "home";
     }
 
-    @DeleteMapping("/deleteNotes/{noteid}")
+    @DeleteMapping("/deleteNote/{noteid}")
     public String deleteNotes(@PathVariable int noteid, Model model){
         notesService.deleteNotes(noteid);
         model.addAttribute("noteid", "successfully deleted");

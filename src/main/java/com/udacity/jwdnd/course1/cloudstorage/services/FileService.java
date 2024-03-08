@@ -27,17 +27,17 @@ public class FileService {
     }
 
     // view file
-    public List<Files> viewFiles(int userid){
+    public List<String> viewFiles(Integer userid){
         return filesMapper.getUserFiles(userid);
     }
 
-    public Files getFile(int fileid){
+    public Files getFile(Integer fileid){
         return filesMapper.getFile(fileid);
     }
 
     //delete file
-    public void deleteFile(String fileName){
-         filesMapper.deleteFile(fileName);
+    public void deleteFile(Integer fileid){
+         filesMapper.deleteFile(fileid);
     }
 
     //check if the file already exists

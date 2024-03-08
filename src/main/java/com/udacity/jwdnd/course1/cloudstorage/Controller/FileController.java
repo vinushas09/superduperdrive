@@ -30,7 +30,7 @@ public class FileController {
     }
 
     @PostMapping("/uploadFiles")
-    public String uploadFile(@RequestParam("uploadfiles") MultipartFile file, Model model) throws IOException {
+    public String uploadFile(@RequestParam("fileUpload") MultipartFile file, Model model) throws IOException {
         try {
             if (!fileService.checkFileExists(file.getOriginalFilename())) {
                 fileService.uploadFiles(file);
@@ -44,8 +44,8 @@ public class FileController {
         return "home";
     }
 
-    @GetMapping("/downloadFile/{fileid}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable int fileid, Model model){
+    @GetMapping("/viewFile/{fileid}")
+    public ResponseEntity<Resource> viewFile(@PathVariable Integer fileid, Model model){
         Files file = fileService.getFile(fileid);
         return  ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(file.getContenttype()))
@@ -53,15 +53,10 @@ public class FileController {
                 .body(new ByteArrayResource(file.getFiledata()));
     }
 
-    @GetMapping("/viewFiles/{userid}")
-    public String viewFiles(@PathVariable int userid, Model model){
-        model.addAttribute("usersFiles", fileService.viewFiles(userid));
-        return "home";
-    }
 
     @DeleteMapping("/deleteFile/{name}")
-    public String deleteFiles(@PathVariable String fileName, Model model){
-        fileService.deleteFile(fileName);
+    public String deleteFiles(@PathVariable Integer fileid, Model model){
+        fileService.deleteFile(fileid);
         model.addAttribute("deletedFile", true);
         return "home";
     }

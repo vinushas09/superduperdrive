@@ -27,7 +27,7 @@ public class CredentialsController {
     }
 
     @PostMapping("/addCredentails")
-    public String addCredentails(Credentials credentials, Model model){
+    public String addCredentails(@ModelAttribute("credentials") Credentials credentials, Model model){
         if(credentials.getCredentialid() == null){
             credentialsService.createCredentials(credentials);
         } else {
@@ -39,14 +39,14 @@ public class CredentialsController {
 
     @GetMapping("/viewCredentials/{id}")
     public String viewCredentials(@PathVariable int credentialid, Model model){
-        credentialsService.viewCredentials(credentialid);
+        credentialsService.getCredentials(credentialid);
         model.addAttribute("credentials","successfully updated");
         return "home";
     }
 
-    @DeleteMapping("/deleteCredentials/{name}")
-    public String deleteCredentials(@PathVariable String name, Model model){
-        credentialsService.deleteNotes(name);
+    @DeleteMapping("/deleteCredentials/{credentialid}")
+    public String deleteCredentials(@PathVariable Integer credentialid, Model model){
+        credentialsService.deleteNotes(credentialid);
         model.addAttribute("deleteCredential", "successfully deleted");
         return "home";
     }

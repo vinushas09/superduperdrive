@@ -35,6 +35,7 @@ public class UserAuthenticationService implements AuthenticationProvider {
                 return new UsernamePasswordAuthenticationToken(username,password,new ArrayList<>());
             }
         }
+
         return null;
     }
 
