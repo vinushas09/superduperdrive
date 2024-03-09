@@ -28,10 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2/**","/signup", "/css/**", "/js/**").permitAll()
                 .anyRequest().authenticated();
         http.formLogin()
-                .loginPage("/home")
+                .loginPage("/login")
                 .permitAll();
         http.formLogin()
-                .defaultSuccessUrl("/files/uploadFiles",true);
+                .defaultSuccessUrl("/home",true);
 
         http.logout().logoutSuccessUrl("/login");
 

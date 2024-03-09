@@ -44,9 +44,6 @@ public class SignupController {
         } else {
             model.addAttribute("signupError", signupError);
         }
-        String userName = authentication.getName();
-        System.out.println("user id is " + userMapper.getUserId(users.getUsername()));
-        System.out.println("Authenticated user id is " + userName);
         return "signup";
     }
 }

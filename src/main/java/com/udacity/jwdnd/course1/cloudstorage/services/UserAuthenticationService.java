@@ -13,7 +13,6 @@ import java.util.ArrayList;
 @Service
 public class UserAuthenticationService implements AuthenticationProvider {
 
-
     private UserMapper userMapper;
     private HashService hashService;
 
