@@ -54,7 +54,7 @@ public class FileController {
     }
 
 
-    @DeleteMapping("/deleteFile/{name}")
+    @GetMapping("/deleteFile/{fileid}")
     public String deleteFiles(@PathVariable Integer fileid, Model model){
         fileService.deleteFile(fileid);
         model.addAttribute("deletedFile", true);

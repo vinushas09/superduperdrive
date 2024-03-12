@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.Mapper;
 import com.udacity.jwdnd.course1.cloudstorage.Entity.Files;
 import org.apache.ibatis.annotations.*;
 
+import java.io.File;
 import java.util.List;
 
 @Mapper
@@ -13,7 +14,7 @@ public interface FilesMapper {
     Integer insertFiles(Files files);
 
     @Select("SELECT * FROM Files WHERE filename = #{filename}")
-    Files getFiles(String filename);
+    Files getFileByName(String filename);
 
     @Select("SELECT * FROM Files WHERE fileid = #{fileid}")
     Files getFile(Integer fileid);

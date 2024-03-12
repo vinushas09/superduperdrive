@@ -6,6 +6,7 @@ import com.udacity.jwdnd.course1.cloudstorage.Mapper.FilesMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,7 +44,8 @@ public class FileService {
     //check if the file already exists
 
     public boolean checkFileExists(String fileName){
-        if (filesMapper.getFiles(fileName) != null){
+
+        if (filesMapper.getFileByName(fileName) != null){
             return true;
         } else {
             return false;

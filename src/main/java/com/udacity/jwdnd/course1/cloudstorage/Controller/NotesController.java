@@ -26,7 +26,7 @@ public class NotesController {
     }
 
     @PostMapping("/createNote")
-    public String createNotes(@ModelAttribute("notes") Notes notes , Model model){
+    public String createNotes( Notes notes , Model model){
         if(notes.getNoteid() == null){
            notesService.createNotes(notes);
         }
@@ -35,13 +35,13 @@ public class NotesController {
     }
 
     @PutMapping("/editNote")
-    public String editNotes(@ModelAttribute Notes note,Model model){
+    public String editNotes(Notes note,Model model){
         notesService.editNotes(note);
         model.addAttribute("notestitle", "notes updated successfully ");
         return "home";
     }
 
-    @DeleteMapping("/deleteNote/{noteid}")
+    @GetMapping("/deleteNote/{noteid}")
     public String deleteNotes(@PathVariable int noteid, Model model){
         notesService.deleteNotes(noteid);
         model.addAttribute("noteid", "successfully deleted");

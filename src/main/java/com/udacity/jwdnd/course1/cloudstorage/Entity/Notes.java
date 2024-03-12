@@ -7,6 +7,9 @@ public class Notes {
     private String notedescription;
     private Integer userid; //FK
 
+    public Notes(){
+
+    }
     public Notes(Integer noteid, String notetitle, String notedescription){
         this.noteid = noteid;
         this.notetitle = notetitle;

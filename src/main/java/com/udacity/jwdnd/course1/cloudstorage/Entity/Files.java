@@ -4,14 +4,14 @@ import java.sql.Blob;
 
 public class Files {
 
-    private int fileid; //PK
+    private Integer fileid; //PK
     private String filename;
     private String contenttype;
     private long filesize;
-    private int userid; //FK
+    private Integer userid; //FK
     private byte[] filedata;
 
-    public Files(Integer fileid, String filename, String contenttype, long filesize, int userid, byte[] filedata) {
+    public Files(Integer fileid, String filename, String contenttype, long filesize, Integer userid, byte[] filedata) {
         this.fileid = fileid;
         this.filename = filename;
         this.contenttype = contenttype;
@@ -20,11 +20,11 @@ public class Files {
         this.filedata = filedata;
     }
 
-    public int getFileid() {
+    public Integer getFileid() {
         return fileid;
     }
 
-    public void setFileid(int fileid) {
+    public void setFileid(Integer fileid) {
         this.fileid = fileid;
     }
 
@@ -52,11 +52,11 @@ public class Files {
         this.filesize = filesize;
     }
 
-    public int getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(Integer userid) {
         this.userid = userid;
     }
 

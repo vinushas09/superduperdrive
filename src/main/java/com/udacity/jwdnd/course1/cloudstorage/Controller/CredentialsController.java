@@ -44,7 +44,7 @@ public class CredentialsController {
         return "home";
     }
 
-    @DeleteMapping("/deleteCredentials/{credentialid}")
+    @GetMapping("/deleteCredentials/{credentialid}")
     public String deleteCredentials(@PathVariable Integer credentialid, Model model){
         credentialsService.deleteNotes(credentialid);
         model.addAttribute("deleteCredential", "successfully deleted");
