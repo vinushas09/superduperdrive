@@ -41,7 +41,7 @@ public class FileController {
         }catch(IOException ioException){
             ioException.printStackTrace();
         }
-        return "home";
+        return "redirect:/home";
     }
 
     @GetMapping("/viewFile/{fileid}")

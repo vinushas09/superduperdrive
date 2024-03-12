@@ -34,7 +34,7 @@ public class HomeController {
     public String getHomePage(Model model){
         Integer userid = userService.getCurrentUser();
 
-        List<String> files = fileService.viewFiles(userid);
+        List<Files> files = fileService.viewFiles(userid);
         model.addAttribute("files", files);
 
         List<Notes> notes = notesService.viewNotes(userid);

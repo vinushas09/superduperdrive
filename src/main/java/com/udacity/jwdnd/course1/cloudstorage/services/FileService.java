@@ -28,8 +28,13 @@ public class FileService {
     }
 
     // view file
-    public List<String> viewFiles(Integer userid){
-        return filesMapper.getUserFiles(userid);
+    public List<Files> viewFiles(Integer userid){
+        try {
+            return filesMapper.getUserFiles(userid);
+        } catch(NumberFormatException ne){
+            ne.printStackTrace();
+        }
+        return null;
     }
 
     public Files getFile(Integer fileid){

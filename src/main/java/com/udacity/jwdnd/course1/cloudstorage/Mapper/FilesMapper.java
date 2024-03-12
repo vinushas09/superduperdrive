@@ -20,7 +20,7 @@ public interface FilesMapper {
     Files getFile(Integer fileid);
 
     @Select("SELECT filename FROM Files WHERE userid = #{userid}")
-    List<String> getUserFiles(Integer userid);
+    List<Files> getUserFiles(Integer userid);
 
 //    @Update("UPDATE FILES SET filename = #{filename} WHERE filename = #{filename}")
 //    void updateFiles(Files files);
