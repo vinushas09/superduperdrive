@@ -31,20 +31,20 @@ public class NotesController {
            notesService.createNotes(notes);
         }
         model.addAttribute("newnotes", "created successfully");
-        return "home";
+        return "redirect:/home";
     }
 
     @PutMapping("/editNote")
     public String editNotes(Notes note,Model model){
         notesService.editNotes(note);
         model.addAttribute("notestitle", "notes updated successfully ");
-        return "home";
+        return "redirect:/home";
     }
 
     @GetMapping("/deleteNote/{noteid}")
     public String deleteNotes(@PathVariable int noteid, Model model){
         notesService.deleteNotes(noteid);
         model.addAttribute("noteid", "successfully deleted");
-        return "home";
+        return "redirect:/home";
     }
 }
