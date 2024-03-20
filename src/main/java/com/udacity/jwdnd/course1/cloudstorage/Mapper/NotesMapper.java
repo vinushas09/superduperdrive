@@ -15,7 +15,7 @@ public interface NotesMapper {
     @Select("SELECT * FROM NOTES WHERE userid = #{userid}")
     List<Notes> getNotes(Integer userid);
 
-    @Update("UPDATE NOTES SET noteid = #{noteid} , notetitle = #{notetitle} , notedescription = #{notedescription} WHERE userid = #{userid}")
+    @Update("UPDATE NOTES SET  notetitle = #{notetitle} , notedescription = #{notedescription} WHERE noteid = #{noteid}")
     void updateNotes(Notes notes);
 
     @Delete("DELETE FROM NOTES WHERE noteid = #{noteid}")

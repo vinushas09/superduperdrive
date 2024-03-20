@@ -43,10 +43,10 @@ public class HomeController {
         List<Credentials> credentials = credentialsService.getCredentialsOfUser(userid);
         model.addAttribute("credentials", credentials);
 
-//        Notes note = new Notes(userid, "notetitle", "notedescription");
-//        model.addAttribute("newNote", note);
-//        Credentials credential = new Credentials();
-//        model.addAttribute("newCredential", credential);
+        Notes note = new Notes(userid, "notetitle", "notedescription");
+        model.addAttribute("newNote", note);
+        Credentials credential = new Credentials();
+        model.addAttribute("newCredential", credential);
         model.addAttribute("encryptionService", encryptionService);
         return "home";
     }

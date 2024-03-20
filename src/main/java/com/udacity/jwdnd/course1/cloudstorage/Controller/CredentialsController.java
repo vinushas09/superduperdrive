@@ -27,27 +27,27 @@ public class CredentialsController {
     }
 
     @PostMapping("/addCredentails")
-    public String addCredentails(@ModelAttribute("credentials") Credentials credentials, Model model){
+    public String addCredentails(Credentials credentials, Model model){
         if(credentials.getCredentialid() == null){
             credentialsService.createCredentials(credentials);
         } else {
             credentialsService.editCredentials(credentials);
         }
-        model.addAttribute("credentials", "added successfully");
-        return "home";
+        model.addAttribute("newCredentials", "added successfully");
+        return "redirect:/home";
     }
 
     @GetMapping("/viewCredentials/{id}")
     public String viewCredentials(@PathVariable int credentialid, Model model){
         credentialsService.getCredentials(credentialid);
         model.addAttribute("credentials","successfully updated");
-        return "home";
+        return "redirect:/home";
     }
 
     @GetMapping("/deleteCredentials/{credentialid}")
     public String deleteCredentials(@PathVariable Integer credentialid, Model model){
         credentialsService.deleteNotes(credentialid);
         model.addAttribute("deleteCredential", "successfully deleted");
-        return "home";
+        return "redirect:/home";
     }
 }

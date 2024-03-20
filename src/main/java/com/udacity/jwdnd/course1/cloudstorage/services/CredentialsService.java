@@ -32,7 +32,7 @@ public class CredentialsService {
     }
 
     // view credentials
-    public Credentials getCredentials(int credentialid){
+    public Credentials getCredentials(Integer credentialid){
         return credentialsMapper.getCredentials(credentialid);
     }
 
@@ -42,7 +42,7 @@ public class CredentialsService {
 
 
     //get key
-    public String getCredentialKey(int credentialid){
+    public String getCredentialKey(Integer credentialid){
         return credentialsMapper.getKey(credentialid);
     }
     //edit credentials
