@@ -42,6 +42,11 @@ public class UserService {
         return userMapper.getUserId(username);
     }
 
+    //delete a single user by username
+    public void deleteUser(String username){
+        userMapper.deleteUser(username);
+    }
+
     //list all users in the database
     public List<Users> listAllUsers(){
         return userMapper.getAllUsers();
