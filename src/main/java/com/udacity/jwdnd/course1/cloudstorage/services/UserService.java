@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -39,6 +40,11 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         return userMapper.getUserId(username);
+    }
+
+    //list all users in the database
+    public List<Users> listAllUsers(){
+        return userMapper.getAllUsers();
     }
 
 }
